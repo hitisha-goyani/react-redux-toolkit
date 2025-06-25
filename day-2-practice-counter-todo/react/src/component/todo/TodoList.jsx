@@ -10,17 +10,25 @@ const TodoList = () => {
   const [editText, setEditText] = useState("");
 
   return (
+    <> 
+ 
     <div>
-      <div className="max-w-sm mx-auto my-10 ">
-        <table className="table-auto">
-          <tr>
-            <th className="px-4 py-2 border bg-blue-300">Todo</th>
-            <th className="px-4 py-2 border bg-blue-300">status</th>
-            <th className="px-4 py-2 border bg-blue-300">Edit</th>
-            <th className="px-4 py-2 border bg-blue-300">Delete</th>
-          </tr>
+      
+      <div className="max-w-7xl  my-10 ">
+        <table className="table-auto ms-35">
+
+           <tr>
+            <th className="px-20 py-2 border bg-blue-300">Todo</th>
+            <th className="px-20 py-2 border bg-blue-300">status</th>
+            <th className="px-20 py-2 border bg-blue-300">Edit</th>
+            <th className="px-20 py-2 border bg-blue-300">Delete</th>
+          </tr>  
+     
+       
+
+
           {todo?.map((ele) => (
-            <tr key={ele.id}>
+            <tr key={ele.id} className="text-center ">
               <td className="p-2 border rounded-3 bg-blue-100">
                 {editId === ele.id ? (
                   <input
@@ -77,10 +85,14 @@ const TodoList = () => {
                 <button>🗑️</button>
               </td>
             </tr>
+        
           ))}
+      
         </table>
       </div>
     </div>
+    </>
+   
   );
 };
 
