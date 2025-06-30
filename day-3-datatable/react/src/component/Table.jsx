@@ -1,14 +1,13 @@
 import React from "react";
-import data from "../utilize/Data";
-import { RiHeartFill, RiSortAlphabetAsc, RiSortAlphabetDesc, RiSortAsc, RiSortDesc, RiSortNumberDesc } from "@remixicon/react";
+import {
+  RiSortAsc,
+  RiSortDesc,
+} from "@remixicon/react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortData } from "../reduxToolkit/dataReducer/dataSlice";
 
-console.log(data);
-
 const Table = () => {
-
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.data.data);
   const { sortBy, sortDirection } = useSelector((state) => state.data);
 
@@ -16,38 +15,49 @@ const Table = () => {
     dispatch(sortData(field));
   };
 
+  const getSortIcon = (field) => {
+    if (sortBy !== field) return <RiSortAsc className="inline ml-1" />;
+    return sortDirection === "asc" ? (
+      <RiSortAsc className="inline ml-1" />
+    ) : (
+      <RiSortDesc className="inline ml-1" />
+    );
+  };
+
   return (
     <div>
-      <div className="relative overflow-x-auto">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative overflow-x-auto mt-5 " >
+          <h1 className="text-2xl font-bold text-center my-5">Datatable</h1>
+        <table className="w-max-7xl mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700  uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          
             <tr>
-              <th scope="col" className="px-6 py-3">
-                id
-                <button className="align-middle border ml-1 rounded"></button>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("id")}>
+                ID {getSortIcon("id")}
               </th>
-                     <th onClick={() => handleSort('name')}>Name {sortBy === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}</th>
-              <th scope="col" className="px-6 py-3">
-                last name
-                <button className="align-middle border ml-1 rounded"><RiSortAlphabetAsc/></button>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("first_name")}>
+                First Name {getSortIcon("first_name")}
               </th>
-              <th scope="col" className="px-6 py-3">
-                email
-                <button className="align-middle border ml-1 rounded"><RiSortDesc /></button>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("last_name")}>
+                Last Name {getSortIcon("last_name")}
               </th>
-              <th scope="col" className="px-6 py-3">
-                gender
-                 <button className="align-middle border ml-1 rounded"><RiSortAlphabetAsc/></button>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("email")}>
+                Email {getSortIcon("email")}
               </th>
-              <th scope="col" className="px-6 py-3">
-                city
-                  <button className="align-middle border ml-1 rounded"><RiSortAlphabetAsc/></button>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("gender")}>
+                Gender {getSortIcon("gender")}
+              </th>
+              <th className="px-6 py-3 cursor-pointer" onClick={() => handleSort("city")}>
+                City {getSortIcon("city")}
               </th>
             </tr>
           </thead>
           <tbody>
             {data.map((ele) => (
-              <tr key={ele.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+              <tr
+                key={ele.id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+              >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"

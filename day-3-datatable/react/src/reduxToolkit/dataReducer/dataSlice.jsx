@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import data from "../../utilize/data"
 
 const initialState = {
-  data: [],
+  data:data,
   sortBy: null,
   direction: 'asc',
 };
